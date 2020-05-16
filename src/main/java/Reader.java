@@ -14,6 +14,7 @@ import java.util.*;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class Reader {
+    ArrayList l;
 
     public static void main(String[] args) throws IOException {
         /** чтение из файла, запись в список lines и перевод в массив linearr для удобства работы,
@@ -27,18 +28,18 @@ public class Reader {
         List<String> listword = new ArrayList<String>();
         for (i = 0; i < linearr.length; i++) {
             parts = linearr[i].split(" ");
-            Collections.addAll(listword, parts);}
-
-            System.out.println("Лист полученных значений " + listword);
-        /**зачем придумывать сложный метод для сонртирорвки если java предлагает нам TreeSet?*/
-            Set<String>  setWord = new TreeSet<String>(listword);
-            System.out.println("Убрали повторы " + setWord);
-
-            /** запишем полученный результат в файл*/
-            Files.write(Paths.get("C://readmepls_new.txt"), setWord);
-
-
+            Collections.addAll(listword, parts);
         }
+
+        System.out.println("Лист полученных значений " + listword);
+        /**зачем придумывать сложный метод для сонртирорвки если java предлагает нам TreeSet?*/
+        Set<String> setWord = new TreeSet<String>(listword);
+        System.out.println("Убрали повторы " + setWord);
+
+        /** запишем полученный результат в файл*/
+        Files.write(Paths.get("C://readmepls_new.txt"), setWord);
+
+    }
 
 }
 
