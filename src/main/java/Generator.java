@@ -5,41 +5,45 @@
  */
 
 
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Generator {
 
-    private static String word;
-    private static String bigword;
-    private static int c;
-    private static String[] phaser;
+    private String word;
+    private String bigword;
+    private static String texter;
     private String bigwordliter;
     private String bigwordfl;
+    private int c, v, b;
+    private String[] phaser;
+    private String[] text;
+    private String[] paragrath;
 
-    public static void main(String[] args) {
+
+    /**
+     * метод для создания текста и записи его в вф айл
+     */
+    public static void main(String[] args) throws IOException {
 
         Generator generator = new Generator();
 
+        texter = generator.text();
 
-        /** создание предложения */
-        ThreadLocalRandom random2 = ThreadLocalRandom.current();
-        int howManyWords = random2.nextInt(0, 13);
-        phaser = new String[howManyWords];
-        for (c = 0; c < howManyWords; c++) {
-            phaser[c] = generator.word();
+        try (FileOutputStream out = new FileOutputStream("textgen.txt");
+             BufferedOutputStream bos = new BufferedOutputStream(out)) {
+            byte[] buffer = texter.getBytes();
+            bos.write(buffer, 0, buffer.length);
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
         }
-        String phaserstr = String.join(" ", phaser);
-
-        String phrase = generator.bigword() + " " + phaserstr + generator.dot();
-        System.out.println(phrase);
-
 
     }
 
     /**
      * создание обычного слова
-     *
-     * @return
      */
 
     public String word() {
@@ -56,8 +60,6 @@ public class Generator {
 
     /**
      * создание начального слова
-     *
-     * @return
      */
 
     public String bigword() {
@@ -82,19 +84,74 @@ public class Generator {
 
     }
 
+    /**
+     * выбор знака препинания
+     */
     public String dot() {
         ThreadLocalRandom random4 = ThreadLocalRandom.current();
-        int dot = random4.nextInt(1, 4);
-        if (dot == 0) {
-            return ".";
-        } else if (dot == 1) {
-            return "!";
+        int dot = random4.nextInt(0, 4);
+        if (dot == 1) {
+            return ". ";
+        } else if (dot == 2) {
+            return "! ";
         } else {
-            return "?";
+            return "? ";
         }
 
 
     }
+
+    /**
+     * создание предложения
+     *
+     * @return
+     */
+    public String phrase() {
+
+        Generator generator = new Generator();
+
+        ThreadLocalRandom random2 = ThreadLocalRandom.current();
+        int howManyWords = random2.nextInt(0, 13);
+        phaser = new String[howManyWords];
+        for (c = 0; c < howManyWords; c++) {
+            phaser[c] = generator.word();
+        }
+        String phaserstr = String.join(" ", phaser);
+
+        String phrase = generator.bigword() + " " + phaserstr + generator.dot();
+
+        return phrase;
+    }
+
+    public String paragrath() {
+        Generator generator = new Generator();
+
+        ThreadLocalRandom random5 = ThreadLocalRandom.current();
+        int howManyphrase = random5.nextInt(1, 21);
+        paragrath = new String[howManyphrase];
+        for (v = 0; v < howManyphrase; v++) {
+            paragrath[v] = generator.phrase();
+        }
+        String parastr = String.join(" ", paragrath);
+
+        return parastr;
+
+    }
+
+    public String text() {
+        Generator generator = new Generator();
+        ThreadLocalRandom random6 = ThreadLocalRandom.current();
+        int howManytext = random6.nextInt(1, 10);
+        text = new String[howManytext];
+        for (b = 0; b < howManytext; b++) {
+            text[b] = generator.paragrath();
+        }
+        String texter = String.join("\r", text);
+
+        return texter;
+
+    }
+
 }
 
 
