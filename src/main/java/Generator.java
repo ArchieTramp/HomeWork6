@@ -123,6 +123,9 @@ public class Generator {
         return phrase;
     }
 
+    /**
+     * создание абзаца
+     */
     public String paragrath() {
         Generator generator = new Generator();
 
@@ -138,6 +141,9 @@ public class Generator {
 
     }
 
+    /**
+     * создание текста
+     */
     public String text() {
         Generator generator = new Generator();
         ThreadLocalRandom random6 = ThreadLocalRandom.current();
@@ -149,6 +155,10 @@ public class Generator {
         String texter = String.join("\r", text);
 
         return texter;
+
+    }
+
+    public void arraword() {
 
     }
 
