@@ -10,6 +10,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.concurrent.ThreadLocalRandom;
 
+
 public class Generator {
 
     private String word;
@@ -21,6 +22,7 @@ public class Generator {
     private String[] phaser;
     private String[] text;
     private String[] paragrath;
+//    private String phrase;
 
 
     /**
@@ -117,11 +119,20 @@ public class Generator {
             phaser[c] = generator.word();
         }
         String phaserstr = String.join(" ", phaser);
+        /*if (howManyWords > 6) { */
+            String phrase = generator.bigword() + " " + phaserstr + generator.dot();
+        /*} else {
+            String phrase = generator.bigword() + " " + phaserstr + generator.arrayword() + generator.dot();
+        }*/
 
-        String phrase = generator.bigword() + " " + phaserstr + generator.dot();
 
         return phrase;
     }
+
+//    private String arrayword() {
+//        getFiles("C://arrayofwords.txt", 1000, 7, "words", 1 / 7);
+//        return null;
+//    }
 
     /**
      * создание абзаца
@@ -158,8 +169,7 @@ public class Generator {
 
     }
 
-    public void arraword() {
-
+    private void getFiles(String s, int i, int i1, String words, int i2) {
     }
 
 }
