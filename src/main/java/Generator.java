@@ -163,7 +163,7 @@ public class Generator {
         for (b = 0; b < howManytext; b++) {
             text[b] = generator.paragrath();
         }
-        String texter = String.join("\r", text);
+        String texter = String.join("\r\n", text);
 
         return texter;
 
